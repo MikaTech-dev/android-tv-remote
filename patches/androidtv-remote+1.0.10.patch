@@ -1,0 +1,38 @@
+diff --git a/node_modules/androidtv-remote/dist/pairing/PairingManager.js b/node_modules/androidtv-remote/dist/pairing/PairingManager.js
+index 57fb0f0..0933c72 100644
+--- a/node_modules/androidtv-remote/dist/pairing/PairingManager.js
++++ b/node_modules/androidtv-remote/dist/pairing/PairingManager.js
+@@ -44,13 +44,20 @@ class PairingManager extends _events.default {
+     var code_bytes = this.hexStringToBytes(code);
+     var client_certificate = this.client.getCertificate();
+     var server_certificate = this.client.getPeerCertificate();
++    console.error("CLIENT CERT EXPONENT: ", client_certificate.exponent);
++    console.error("SERVER CERT EXPONENT: ", server_certificate.exponent);
+ 
+     var sha256 = _cryptoJs.default.algo.SHA256.create();
+ 
+-    sha256.update(_cryptoJs.default.enc.Hex.parse(client_certificate.modulus));
+-    sha256.update(_cryptoJs.default.enc.Hex.parse("0" + client_certificate.exponent.slice(2)));
+-    sha256.update(_cryptoJs.default.enc.Hex.parse(server_certificate.modulus));
+-    sha256.update(_cryptoJs.default.enc.Hex.parse("0" + server_certificate.exponent.slice(2)));
++    function padHex(val) {
++        if (val.startsWith('0x')) val = val.slice(2);
++        return val.length % 2 !== 0 ? "0" + val : val;
++    }
++
++    sha256.update(_cryptoJs.default.enc.Hex.parse(padHex(client_certificate.modulus)));
++    sha256.update(_cryptoJs.default.enc.Hex.parse(padHex(client_certificate.exponent)));
++    sha256.update(_cryptoJs.default.enc.Hex.parse(padHex(server_certificate.modulus)));
++    sha256.update(_cryptoJs.default.enc.Hex.parse(padHex(server_certificate.exponent)));
+     sha256.update(_cryptoJs.default.enc.Hex.parse(code.slice(2)));
+     var hash = sha256.finalize();
+     var hash_array = this.hexStringToBytes(hash.toString());
+@@ -60,7 +67,7 @@ class PairingManager extends _events.default {
+       this.client.destroy(new Error("Bad Code"));
+       return false;
+     } else {
+-      this.client.write(_PairingMessageManager.pairingMessageManager.createPairingSecret(hash_array));
++      this.client.write(_PairingMessageManager.pairingMessageManager.createPairingSecret(Buffer.from(hash_array)));
+       return true;
+     }
+   }
