@@ -27,16 +27,18 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    box-sizing: border-box;
 }
 
 #app {
     width: 100%;
     max-width: 380px;
     padding: 24px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -136,7 +138,7 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
-button:active { transform: scale(0.97); }
+button:active:not(.dpad-btn) { transform: scale(0.95); }
 
 .primary-btn {
     background: var(--btn-primary-bg);
@@ -248,18 +250,26 @@ button:active { transform: scale(0.97); }
     background: transparent;
     color: var(--text-muted);
     font-size: 1.2rem;
-    transition: color 0.2s;
+    transition: all 0.15s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
 }
 
 .dpad-btn:hover { color: var(--text-main); }
 
-.dpad-btn.up { top: 12px; left: 50%; transform: translateX(-50%); width: 60px; height: 40px; }
-.dpad-btn.down { bottom: 12px; left: 50%; transform: translateX(-50%); width: 60px; height: 40px; }
-.dpad-btn.left { left: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 60px; }
-.dpad-btn.right { right: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 60px; }
+.dpad-btn.up { top: 8px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; }
+.dpad-btn.up:active { transform: translateX(-50%) scale(0.9); background: var(--btn-secondary-hover); color: var(--border-focus); }
+
+.dpad-btn.down { bottom: 8px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; }
+.dpad-btn.down:active { transform: translateX(-50%) scale(0.9); background: var(--btn-secondary-hover); color: var(--border-focus); }
+
+.dpad-btn.left { left: 8px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; }
+.dpad-btn.left:active { transform: translateY(-50%) scale(0.9); background: var(--btn-secondary-hover); color: var(--border-focus); }
+
+.dpad-btn.right { right: 8px; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; }
+.dpad-btn.right:active { transform: translateY(-50%) scale(0.9); background: var(--btn-secondary-hover); color: var(--border-focus); }
 
 .dpad-btn.center {
     top: 50%; left: 50%;
@@ -273,7 +283,9 @@ button:active { transform: scale(0.97); }
     border: 1px solid var(--border-color);
 }
 .dpad-btn.center:active {
-    background: var(--bg-main);
+    transform: translate(-50%, -50%) scale(0.92);
+    background: var(--btn-secondary-hover);
+    border-color: var(--text-muted);
 }
 
 .remote-bottom {
@@ -291,6 +303,14 @@ button:active { transform: scale(0.97); }
     border: 1px solid var(--border-color);
 }
 .action-btn:hover { background: var(--btn-secondary-hover); }
+
+.danger-btn {
+    color: var(--status-dot-error);
+}
+.danger-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+}
 
 .volume-controls {
     display: flex;
@@ -320,4 +340,64 @@ button:active { transform: scale(0.97); }
     font-weight: 500;
     color: var(--text-muted);
     letter-spacing: 0.05em;
+}
+
+.disconnect-wrapper {
+    margin-top: 12px;
+    width: 100%;
+}
+.disconnect-wrapper #btn-disconnect {
+    width: 100%;
+    padding: 14px;
+}
+
+/* Footer */
+.app-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--panel-bg);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 24px 20px;
+}
+
+.footer-content {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: #71717a;
+}
+
+/* GitHub Float */
+.github-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    z-index: 100;
+}
+.github-float:hover {
+    background: var(--btn-secondary-hover);
+    transform: translateY(-2px);
+    color: var(--border-focus);
 }

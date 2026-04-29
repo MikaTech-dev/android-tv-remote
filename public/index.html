@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,11 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="app">
         <header>
-            <div class="brand-title">Remote</div>
+            <div class="brand-title">Android TV Remote</div>
             <div id="status-indicator" class="status disconnected"><span class="status-dot"></span> Disconnected</div>
         </header>
 
@@ -22,19 +24,19 @@
             <section id="setup-section" class="panel">
                 <div class="panel-header">
                     <h2>Network Connection</h2>
-                    <p class="panel-subtitle">Enter your device IP to establish a connection.</p>
+                    <p class="panel-subtitle">Enter your device IP to connect to it.</p>
                 </div>
-                
+
                 <div class="input-group">
                     <input type="text" id="tv-ip" placeholder="e.g. 192.168.1.50">
                     <button id="btn-connect" class="primary-btn">Connect</button>
                 </div>
-                
+
                 <div id="recent-ips-container" class="hidden recent-section">
                     <p class="recent-label">Recent Devices</p>
                     <div id="recent-ips-list" class="recent-list"></div>
                 </div>
-                
+
                 <div id="pairing-section" class="hidden pairing-box">
                     <p class="pairing-label">Authentication required. Enter the PIN displayed on your device.</p>
                     <div class="input-group">
@@ -50,7 +52,7 @@
                     <button class="icon-btn" data-key="POWER" title="Power"><i class="ph ph-power"></i></button>
                     <button class="icon-btn" data-key="MUTE" title="Mute"><i class="ph ph-speaker-slash"></i></button>
                 </div>
-                
+
                 <div class="dpad">
                     <button class="dpad-btn up" data-key="DPAD_UP">▲</button>
                     <button class="dpad-btn left" data-key="DPAD_LEFT">◀</button>
@@ -63,17 +65,35 @@
                     <button class="action-btn" data-key="BACK">Back</button>
                     <button class="action-btn" data-key="HOME">Home</button>
                 </div>
-                
+
                 <div class="volume-controls">
                     <button class="vol-btn" data-key="VOLUME_DOWN">-</button>
                     <span class="vol-label">VOL</span>
                     <button class="vol-btn" data-key="VOLUME_UP">+</button>
                 </div>
-            </section>
+
+                <div class="disconnect-wrapper">
+                    <button class="action-btn danger-btn" id="btn-disconnect">Disconnect</button>
+                </div>
         </main>
     </div>
 
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div>Made with 💜 by Mikatech</div>
+            <p>©
+                <script>document.write(new Date().getFullYear())</script> All rights reserved.
+            </p>
+        </div>
+    </footer>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
+
+    <a href="https://github.com/MikaTech-dev/android-tv-remote" target="_blank" class="github-float"
+        title="View Source on GitHub">
+        <i class="ph ph-github-logo"></i>
+    </a>
 </body>
+
 </html>

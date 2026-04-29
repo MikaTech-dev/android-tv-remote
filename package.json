@@ -7,6 +7,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
+    "start": "node .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "nodemon .",
     "postinstall": "patch-package"

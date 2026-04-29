@@ -2,8 +2,6 @@ import express from "express";
 import "dotenv/config";
 import morgan from "morgan";
 import { logger } from "./utils/logger.config.js";
-import sendResponse from "./utils/response.middleware.js";
-import router from "./routes/mainRoute.js";
 import http from "http";
 import { Server } from "socket.io";
 import TVService from "./utils/tvService.js";
@@ -20,15 +18,14 @@ const stream = {
     write: message => logger.info(message.trim())
 };
 
-app.use (morgan("tiny", {stream}));
+app.use(morgan("tiny", { stream }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use ("/", router);
 
 // Socket.IO event handling
 io.on("connection", (socket) => {
     logger.info(`Client connected: ${socket.id}`);
-    
+
     socket.emit("connected_tvs", tvService.getConnected());
 
     socket.on("connect_tv", async ({ ip }) => {

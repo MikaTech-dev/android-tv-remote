@@ -18,6 +18,7 @@ const pairingCodeInput = document.getElementById('pairing-code');
 const pairBtn = document.getElementById('btn-pair');
 const recentIpsContainer = document.getElementById('recent-ips-container');
 const recentIpsList = document.getElementById('recent-ips-list');
+const disconnectBtn = document.getElementById('btn-disconnect');
 
 let currentIP = null;
 
@@ -140,6 +141,36 @@ pairBtn.addEventListener('click', () => {
     socket.emit('send_code', { ip: currentIP, code });
     pairingSection.classList.add('hidden');
 });
+
+// Keyboard Support
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        if (!setupSection.classList.contains('hidden')) {
+            if (!pairingSection.classList.contains('hidden')) {
+                pairBtn.click();
+            } else {
+                connectBtn.click();
+            }
+        }
+    }
+});
+
+ipInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') connectBtn.click();
+});
+
+pairingCodeInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') pairBtn.click();
+});
+
+if (disconnectBtn) {
+    disconnectBtn.addEventListener('click', () => {
+        if (currentIP) {
+            clientLogger.info(`Disconnected from TV at ${currentIP}`);
+            switchToSetup();
+        }
+    });
+}
 
 // Remote Buttons
 document.querySelectorAll('[data-key]').forEach(btn => {
