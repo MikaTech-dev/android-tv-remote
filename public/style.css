@@ -377,10 +377,15 @@ button:active:not(.dpad-btn) { transform: scale(0.95); }
 }
 
 /* GitHub Float */
-.github-float {
+.github-wrapper {
     position: fixed;
     bottom: 24px;
     right: 24px;
+    z-index: 100;
+    outline: none;
+}
+
+.github-float {
     width: 48px;
     height: 48px;
     background: var(--panel-bg);
@@ -393,11 +398,57 @@ button:active:not(.dpad-btn) { transform: scale(0.95); }
     font-size: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;
+    cursor: pointer;
     text-decoration: none;
-    z-index: 100;
+    margin-left: auto;
 }
-.github-float:hover {
+
+.github-float:hover, .github-wrapper:focus-within .github-float {
     background: var(--btn-secondary-hover);
     transform: translateY(-2px);
+    color: var(--border-focus);
+}
+
+.github-popup {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 0;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+}
+
+.github-wrapper:hover .github-popup,
+.github-wrapper:focus-within .github-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.github-link:hover {
+    background: var(--btn-secondary-hover);
     color: var(--border-focus);
 }

@@ -5,16 +5,16 @@ A sleek, locally-hosted web application to control your Android TV or Google Cas
 ## Features
 - **Local Network Discovery**: Easily connect to Android TVs using their IP address.
 - **Secure Pairing Flow**: Handles the cryptographic handshake and PIN authentication seamlessly.
-- **Minimalist Web Interface**: High-end, premium crypto-inspired dark mode UI.
+- **Minimalist Web Interface**: High-end, dark mode UI.
 - **D-Pad & Media Controls**: Intuitive remote layout with support for long-press actions.
-- **Quick Reconnect**: Remembers your recently connected devices.
+- **Quick Reconnect**: Remembers your recently connected IPs.
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- A device with Node.js (v16 or higher) installed
 - NPM or Yarn
-- Be on the same network as the TV you want to control
+- Be on the same network as the device you want to control
 - Have an Android TV or Google Cast-enabled device
 
 ### Installation
@@ -44,4 +44,4 @@ Once running, open your browser and navigate to `http://localhost:3000`. Enter y
 ## Built With
 - **Frontend**: Vanilla HTML/CSS/JS
 - **Backend**: Node.js, Express, Socket.IO
-- **Protocol**: Custom Android TV remote protocol handling
+- **Protocol**: Custom Android TV remote protocol handling built by [louis49](https://github.com/louis49/androidtv-remote)
